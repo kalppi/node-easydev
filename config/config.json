@@ -1,0 +1,27 @@
+{
+	"name": "app-name",
+	"version": 0,
+	"port": 8080,
+
+	"deploy": {
+		"host": "host.com",
+		"port": 22,
+		"path": "/home/user/app",
+		"user": "user"
+	},
+
+	"db": {
+		"development": {
+			"host": "localhost",
+			"port": 5432,
+			"user": "user",
+			"db": "db-dev"
+		},
+		"production": {
+			"host": "localhost",
+			"port": 5432,
+			"user": "user",
+			"db": "db"
+		}
+	}
+}
