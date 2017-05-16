@@ -7,7 +7,7 @@ Base for fast node application development.
 Builds everything.
 
 `gulp watch`
-Launches server.js and rebuilds when files change.
+Launches `server.js` and rebuilds when files change.
 
 `npm run sql`
 (Re)creates the development database and adds testdata (see: `sql/*.sql`).
