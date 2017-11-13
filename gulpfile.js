@@ -2,7 +2,9 @@
 
 const gulp = require('gulp'),
 	notify = require("gulp-notify"),
-	plumber = require('gulp-plumber');
+	plumber = require('gulp-plumber'),
+	livereload = require('gulp-livereload'),
+	injector = require('gulp-livereload-inject');
 
 const config = require('./config/config.json');
 
@@ -73,6 +75,11 @@ gulp.task('views', function() {
 	return gulp.src(gulpConfig.viewPath).pipe(gulp.dest(gulpConfig.buildPath + '/views'));
 })
 
+gulp.task('views-dev', function() {
+	console.log("###")
+	return gulp.src(gulpConfig.viewPath).pipe(injector()).pipe(gulp.dest(gulpConfig.buildPath + '/views')).pipe(livereload());
+})
+
 let server = null;
 function spawnServer() {
 	if(server) {
@@ -100,9 +107,13 @@ function spawnServer() {
 
 gulp.task('default', gulp.series('clean:build', 'css', 'js', 'images', 'views'));
 
-gulp.task('watch', gulp.series('default', function watch() {
+gulp.task('dev', gulp.series('clean:build', 'css', 'js-dev', 'images', 'views-dev'));
+
+gulp.task('watch', gulp.series('dev', function watch() {
+	livereload.listen();
+
     gulp.watch(gulpConfig.sassPath, gulp.parallel('css'));
-    gulp.watch(gulpConfig.viewPath, gulp.parallel('views'));
+    gulp.watch(gulpConfig.viewPath, gulp.parallel('views-dev'));
     gulp.watch(gulpConfig.jsPath, gulp.parallel('js-dev'));
     gulp.watch(gulpConfig.imgPath, gulp.parallel('images'));
 
