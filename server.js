@@ -33,8 +33,8 @@ const app = express();
 const hbs = exphbs.create({
 	defaultLayout: 'main',
 	extname: '.hb',
-	layoutsDir: 'build/views/layouts',
-	partialsDir: 'build/views/partials',
+	layoutsDir: config.build_dir + '/views/layouts',
+	partialsDir: config.build_dir + '/views/partials',
 	helpers: {
 		md: markdown()
 	}
@@ -42,9 +42,9 @@ const hbs = exphbs.create({
 
 app.engine('hb', hbs.engine);
 app.set('view engine', '.hb');
-app.set('views', './build/views')
+app.set('views', './' + config.build_dir + '/views')
 
-app.use(express.static('build/public'));
+app.use(express.static(config.build_dir + '/public'));
 
 app.get('/', function (req, res) {
     res.render('index');

@@ -2,6 +2,7 @@
 	"name": "app-name",
 	"version": 0,
 	"port": 8080,
+	"build_dir": "_build",
 
 	"deploy": {
 		"host": "host.com",
